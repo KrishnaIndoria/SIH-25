@@ -1,0 +1,104 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    height: 100vh;
+    background: #f5f7fa;
+    color: #333;
+}
+
+/* Sidebar */
+#nav {
+    width: 16vw;
+    background-color: #ffffff;
+    border-right: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.05);
+}
+#navhead {
+    font-size: 28px;
+    font-weight: bold;
+    padding: 0 20px 20px;
+    color: #26ad80;
+}
+#line {
+    background-color: #26ad80;
+    height: 3px;
+    margin-bottom: 20px;
+}
+.nav-btn, #logout {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    color: #444;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+.nav-btn:hover {
+    background: rgba(38, 173, 128, 0.1);
+    color: #26ad80;
+}
+.nav-btn.active {
+    background: rgba(38, 173, 128, 0.15);
+    color: #26ad80;
+    font-weight: bold;
+}
+#logout {
+    margin-top: auto;
+    font-weight: bold;
+    color: #e63946;
+}
+#logout:hover {
+    background: rgba(230, 57, 70, 0.1);
+}
+
+/* Main Content */
+#main {
+    flex: 1;
+    padding: 30px;
+}
+#mainhead {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Cards */
+#cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+.card {
+    background: #ffffff;
+    border-radius: 12px;
+    height: 200px;
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    font-size: 18px;
+    font-weight: bold;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+.card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+.card img {
+    margin-bottom: 12px;
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="./dashboard.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div id="nav">
+        <button onclick="window.location.href='./dashboard.html'" id="navhead" style="border: none; background: none;cursor: pointer;">SmartClass</button>
+        <div id="line"></div>
+
+        <button class="nav-btn active" onclick="window.location.href='./dashboard.html'">
+            <img src="./Images/dashboard.png" alt="tt" height="20" width="20">
+            <span>Dashboard</span>
+        </button>
+
+        <button class="nav-btn" onclick="window.location.href='./createTT.html'">
+            <img src="./Images/calendarBW.png" alt="tt" height="20" width="20">
+            <span>Timetable</span>
+        </button>
+
+        <button class="nav-btn" onclick="window.location.href='./reports.html'">
+            <img src="./Images/bar-chartBW.png" alt="reports" height="20" width="20">
+            <span>Reports</span>
+        </button>
+
+        <button class="nav-btn" onclick="window.location.href='./settings.html'">
+            <img src="./Images/settingBW.png" alt="settings" height="20" width="20">
+            <span>Settings</span>
+        </button>
+
+        <button id="logout">
+            <img src="./Images/logout.png" alt="logout" height="20" width="20"> 
+            <span style="color: red;">Logout</span>
+        </button>
+    </div>
+
+    <!-- Main content -->
+    <div id="main">
+        <h1 id="mainhead">Welcome, Admin!</h1>
+
+        <div id="cards">          
+            <button onclick="window.location.href='./createTT.html'" id="TT" class="card">
+                <img src="./Images/calendar.png" alt="create TT" height="70" width="70">
+                <p>Create Time Table</p>
+            </button>
+
+            <button onclick="window.location.href='./viewTT.html'" id="viewTT" class="card">
+                <img src="./Images/to-do-list.png" alt="viewTT" height="70" width="70">
+                <p>View Timetable</p>
+            </button>
+
+            <button onclick="window.location.href='./reports.html'" id="report" class="card">
+                <img src="./Images/analysis.png" alt="report" height="70" width="70">
+                <p>Reports & Analytics</p>
+            </button>
+
+            <button onclick="window.location.href='./settings.html'" id="setting" class="card">
+                <img src="./Images/settings.png" alt="settings" height="70" width="70">
+                <p>Settings</p>
+            </button>
+        </div>
+    </div>
+</body>
+</html>
