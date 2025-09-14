@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Timetable</title>
+    <link rel="stylesheet" href="./css/createTT.css">
+</head>
+<body>
+        <div id="nav">
+        <button onclick="window.location.href='./dashboard.html'" id="navhead" style="border: none; background: none;cursor: pointer;">SmartClass</button>
+        <div id="line"></div>
+
+        <button class="nav-btn" onclick="window.location.href='./dashboard.html'">
+            <img src="./Images/dashboard.png" alt="tt" height="20" width="20">
+            <span>Dashboard</span>
+        </button>
+
+        <button class="nav-btn active" onclick="window.location.href='./css/createTT.html'">
+            <img src="./Images/calendarBW.png" alt="tt" height="20" width="20">
+            <span>Timetable</span>
+        </button>
+
+        <button class="nav-btn" onclick="window.location.href='./reports.html'">
+            <img src="./Images/bar-chartBW.png" alt="reports" height="20" width="20">
+            <span>Reports</span>
+        </button>
+
+        <button class="nav-btn" onclick="window.location.href='./settings.html'">
+            <img src="./Images/settingBW.png" alt="settings" height="20" width="20">
+            <span>Settings</span>
+        </button>
+
+        <button id="logout">
+            <img src="./Images/logout.png" alt="logout" height="20" width="20"> 
+            <span style="color: red;">Logout</span>
+        </button>
+    </div>
+
+    <div id="main">
+        <h1 style="font-size: 40px;">Create Timetable</h1>
+        <p style="color: #333; font-size: small;">Fill in the details to schedule a new class</p>
+        <br>
+        <form id="ttforum">
+            <div class="input">
+            <div>
+            <label for="course">Course</label><br>
+            <input type="file" name="Course" id="course" accept=".csv,.xlsx" required>
+            </div>
+
+            <div>
+            <label for="instructor">Instructor</label><br>
+            <input type="file" id="instructor" name="Instructor" accept=".csv,.xlsx" required>
+            </div>
+            </div>
+
+            <div class="input">
+            <div> 
+            <label for="room">Room</label><br>
+            <input type="file" id="room" name="Room" accept=".csv,.xlsx" required>
+            </div>
+            
+            <div>
+            <label for="day">Day of week</label><br>
+            <input type="file" id="day" name="Day" accept=".csv,.xlsx" required>
+            </div>
+            </div>
+
+            <div class="input" id="timeanddate">
+            <div>
+            <label for="time">Start Time</label><br>
+            <input type="time" id="time" name="StartTime" required>
+            </div>
+            
+            <div>
+            <label for="time">End Time</label><br>
+            <input type="time" id="time" name="EndTime" required>
+            </div>
+            </div>
+
+            <div style=" margin-left: 9px;">
+            <label for="date">Date</label><br>
+            <input style="width: 100%;" type="date" id="date" name="Date" required>
+            </div>
+            
+            <button type="submit">Add Timetable</button>
+        </form>
+    </div>
+        
+    <pre id="result"></pre>
+    
+    <script>
+        document.getElementById("ttForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData(document.getElementById("ttForm"));
+        
+        const response = await fetch("/api/upload", {
+            method: "POST",
+            body: formData,
+        });
+    
+        const data = await response.json();
+        document.getElementById("result").textContent = JSON.stringify(data, null, 2);
+    });
+    </script>
+</body>
+</html>
