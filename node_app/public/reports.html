@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>report</title>
+    <style>
+    .dashboard-btn {
+        background-color: rgb(13, 206, 13);
+        width: 200px;
+        padding: 15px;
+        color: aliceblue;
+        border: 1px black solid;
+        cursor: pointer;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .dashboard-btn:hover {
+        background-color: rgb(10, 180, 10); /* darker green */
+        transform: scale(1.05); /* slight zoom */
+    }
+</style>
+</head>
+<body>
+    <h1 id="open">Sorry Page Not Available!!</h1>
+    <br>
+
+<button class="dashboard-btn" onclick="window.location.href='./dashboard.html'">
+    Return to Dashboard
+</button>
+    <!-- <script>
+        const op=op.document.getElementByID("open");
+        op.innerHTML("Sorry Page Not Available!!")
+    </script> -->
+</body>
+</html>
