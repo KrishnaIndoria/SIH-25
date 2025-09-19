@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="./css/createTT.css">
 </head>
 <body>
-        <div id="nav">
+    <!-- Sidebar -->
+    <div id="nav">
         <button onclick="window.location.href='./dashboard.html'" id="navhead" style="border: none; background: none;cursor: pointer;">SmartClass</button>
         <div id="line"></div>
 
@@ -16,7 +17,7 @@
             <span>Dashboard</span>
         </button>
 
-        <button class="nav-btn active" onclick="window.location.href='./css/createTT.html'">
+        <button class="nav-btn active" onclick="window.location.href='./createTT.html'">
             <img src="./Images/calendarBW.png" alt="tt" height="20" width="20">
             <span>Timetable</span>
         </button>
@@ -37,72 +38,98 @@
         </button>
     </div>
 
+    <!-- Main Content -->
     <div id="main">
         <h1 style="font-size: 40px;">Create Timetable</h1>
         <p style="color: #333; font-size: small;">Fill in the details to schedule a new class</p>
         <br>
         <form id="ttforum">
             <div class="input">
-            <div>
-            <label for="course">Course</label><br>
-            <input type="file" name="Course" id="course" accept=".csv,.xlsx" required>
-            </div>
+                <div>
+                    <label for="course">Course</label><br>
+                    <input type="file" name="Course" id="course" accept=".csv,.xlsx">
+                </div>
 
-            <div>
-            <label for="instructor">Instructor</label><br>
-            <input type="file" id="instructor" name="Instructor" accept=".csv,.xlsx" required>
-            </div>
+                <div>
+                    <label for="instructor">Instructor</label><br>
+                    <input type="file" id="instructor" name="Instructor" accept=".csv,.xlsx">
+                </div>
             </div>
 
             <div class="input">
-            <div> 
-            <label for="room">Room</label><br>
-            <input type="file" id="room" name="Room" accept=".csv,.xlsx" required>
-            </div>
-            
-            <div>
-            <label for="day">Day of week</label><br>
-            <input type="file" id="day" name="Day" accept=".csv,.xlsx" required>
-            </div>
+                <div> 
+                    <label for="room">Room</label><br>
+                    <input type="file" id="room" name="Room" accept=".csv,.xlsx">
+                </div>
+                
+                <div>
+                    <label for="day">Day of week</label><br>
+                    <input type="file" id="day" name="Day" accept=".csv,.xlsx">
+                </div>
             </div>
 
             <div class="input" id="timeanddate">
-            <div>
-            <label for="time">Start Time</label><br>
-            <input type="time" id="time" name="StartTime" required>
-            </div>
-            
-            <div>
-            <label for="time">End Time</label><br>
-            <input type="time" id="time" name="EndTime" required>
-            </div>
+                <div>
+                    <label for="time">Start Time</label><br>
+                    <input type="time" id="timeStart" name="StartTime">
+                </div>
+                
+                <div>
+                    <label for="time">End Time</label><br>
+                    <input type="time" id="timeEnd" name="EndTime">
+                </div>
             </div>
 
             <div style=" margin-left: 9px;">
-            <label for="date">Date</label><br>
-            <input style="width: 100%;" type="date" id="date" name="Date" required>
+                <label for="date">Date</label><br>
+                <input style="width: 100%;" type="date" id="date" name="Date">
             </div>
             
             <button type="submit">Generate Timetable</button>
         </form>
     </div>
         
-    <pre id="result"></pre>
-    
+    <!-- Popup Modal for Timetable -->
+    <div id="timetableModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
+        background:rgba(0,0,0,0.6); z-index:1000; justify-content:center; align-items:center;">
+        <div style="background:white; padding:20px; border-radius:10px; width:80%; max-width:800px;">
+            <h2>Generated Timetable</h2>
+            <table border="1" cellspacing="0" cellpadding="10" style="border-collapse: collapse; width:100%;">
+                <thead>
+                    <tr style="background:#f2f2f2;">
+                        <th>Time</th>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                        <th>Friday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>9:00 - 10:00</td><td>Maths</td><td>Physics</td><td>Chemistry</td><td>English</td><td>Lab</td></tr>
+                    <tr><td>10:00 - 11:00</td><td>Physics</td><td>Maths</td><td>Lab</td><td>Chemistry</td><td>English</td></tr>
+                    <tr><td>11:00 - 12:00</td><td>Chemistry</td><td>English</td><td>Maths</td><td>Physics</td><td>Lab</td></tr>
+                    <tr><td>12:00 - 1:00</td><td colspan="5" style="text-align:center;background:#ffe6e6;">Lunch Break</td></tr>
+                    <tr><td>1:00 - 2:00</td><td>Lab</td><td>Chemistry</td><td>English</td><td>Maths</td><td>Physics</td></tr>
+                    <tr><td>2:00 - 3:00</td><td>English</td><td>Lab</td><td>Physics</td><td>Chemistry</td><td>Maths</td></tr>
+                </tbody>
+            </table>
+            <br>
+            <button onclick="closeModal()" style="padding:10px 20px; cursor:pointer;">Close</button>
+        </div>
+    </div>
+
     <script>
-        document.getElementById("ttForm").addEventListener("submit", async (e) => {
-        e.preventDefault();
-        
-        const formData = new FormData(document.getElementById("ttForm"));
-        
-        const response = await fetch("/api/upload", {
-            method: "POST",
-            body: formData,
+        const form = document.getElementById("ttforum");
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            document.getElementById("timetableModal").style.display = "flex";
         });
-    
-        const data = await response.json();
-        document.getElementById("result").textContent = JSON.stringify(data, null, 2);
-    });
+
+        function closeModal() {
+            document.getElementById("timetableModal").style.display = "none";
+        }
     </script>
 </body>
 </html>
